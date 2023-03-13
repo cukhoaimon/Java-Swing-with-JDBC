@@ -28,7 +28,7 @@ public class DBManager {
 	
 	private static Connection getConnection() throws SQLException {
 		final String DB_USERNAME = "root";
-		final String DB_PASSWORD = "Phucmap_caumieu1213";
+		final String DB_PASSWORD = "fit@HCMUS123";
 		final String DRIVER_NAME = "com.mysql.cj.jdbc.Driver";
 		final String SERVER_NAME = "localhost";
 		final String DB_NAME = "QLSV";

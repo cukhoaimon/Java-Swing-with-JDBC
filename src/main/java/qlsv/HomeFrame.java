@@ -1,5 +1,6 @@
 package qlsv;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
@@ -15,6 +16,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.SwingConstants;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -40,33 +42,29 @@ public class HomeFrame extends JFrame {
 		inforContainer.setLayout(new BoxLayout(inforContainer, BoxLayout.Y_AXIS));
 		inforContainer.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 		
-		DBManager sql = DBManager.getInstance();
-		ResultSet qr = sql.runQuery("SELECT * FROM SinhVien");
-		svList = new ArrayList<SinhVien>();
-		
-		while (qr.next()) {
-			svList.add(new SinhVien.Builder().id(qr.getString(1))
-					.name(qr.getString(2)).dob(qr.getString(3))
-					.mark(qr.getDouble(4)).build());		
+		JPanel a = new JPanel();
+		JPanel b = new JPanel();
+		this.add(a, BorderLayout.EAST);
+		this.add(a, BorderLayout.WEST);
+		for (int i = 0; i < 10; i++) {
+			JLabel x = new JLabel("Adu vjp", SwingConstants.CENTER);
+			x.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
+			inforContainer.add(x);
+			
 		}
-		
-		svList.forEach(sv -> {
-			JLabel lab = new JLabel(sv.toString());
-			lab.setFont(new Font("Consolas", Font.PLAIN, 16));
-			inforContainer.add(lab);
-		});
-		
 		JPanel optionContainer = new JPanel();
-		optionContainer.setLayout(new BoxLayout(optionContainer, BoxLayout.Y_AXIS));
+		optionContainer.setLayout(new FlowLayout());
 		
-		JButton addSV = new JButton("Thêm sinh viên");
-		addSV.setFont(new Font("Serif", Font.PLAIN, 32));
-		JButton delSV = new JButton("Xóa sinh viên");
-		delSV.setFont(new Font("Serif", Font.PLAIN, 32));
+		JButton addSv = new JButton("Thêm sinh viên");
+		JButton delSv = new JButton("Xóa sinh viên");
+		JButton logOut = new JButton("Đăng xuất");
+		JButton changepsw = new JButton("Đổi mật khẩu");
 		
-		optionContainer.add(addSV);
-		optionContainer.add(Box.createRigidArea(new Dimension(100, 100)));
-		optionContainer.add(delSV);
+		optionContainer.add(addSv);
+		optionContainer.add(delSv);
+		optionContainer.add(logOut);
+		optionContainer.add(changepsw);
+		
 		
 		int width = 800;
 		int height = 600;
@@ -75,11 +73,13 @@ public class HomeFrame extends JFrame {
 		this.setTitle("Làm ơn chạy đi, tao mệt rồi");
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setBounds((int)pos.width, (int)pos.height, width, height);
-		this.setLayout(new FlowLayout());
-		this.add(inforContainer);
-		this.add(optionContainer, JPanel.CENTER_ALIGNMENT);
-
-		System.out.println("Khởi tạo rùi địt mẹ mày");
+		this.setLayout(new BorderLayout());
+		
+	
+		
+		this.add(inforContainer, BorderLayout.CENTER);
+		this.add(optionContainer, BorderLayout.NORTH);
+		
 		this.setVisible(true);
 	}
 	
