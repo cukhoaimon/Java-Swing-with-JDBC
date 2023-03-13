@@ -24,7 +24,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class HomeFrame extends JFrame {
-	
 	private static final long serialVersionUID = 1L;
 	public static HomeFrame instance = null;
 	private List<SinhVien> svList;
@@ -46,12 +45,13 @@ public class HomeFrame extends JFrame {
 		JPanel b = new JPanel();
 		this.add(a, BorderLayout.EAST);
 		this.add(a, BorderLayout.WEST);
+		
 		for (int i = 0; i < 10; i++) {
 			JLabel x = new JLabel("Adu vjp", SwingConstants.CENTER);
 			x.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
 			inforContainer.add(x);
-			
 		}
+		
 		JPanel optionContainer = new JPanel();
 		optionContainer.setLayout(new FlowLayout());
 		
@@ -65,6 +65,19 @@ public class HomeFrame extends JFrame {
 		optionContainer.add(logOut);
 		optionContainer.add(changepsw);
 		
+		addSv.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				try {
+					AddStudent instance = AddStudent.getInstance();
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
+			
+		});
+		
 		
 		int width = 800;
 		int height = 600;
@@ -75,13 +88,12 @@ public class HomeFrame extends JFrame {
 		this.setBounds((int)pos.width, (int)pos.height, width, height);
 		this.setLayout(new BorderLayout());
 		
-	
-		
 		this.add(inforContainer, BorderLayout.CENTER);
 		this.add(optionContainer, BorderLayout.NORTH);
 		
 		this.setVisible(true);
 	}
+	
 	
 	
 }
