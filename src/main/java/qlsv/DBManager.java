@@ -44,6 +44,23 @@ public class DBManager {
 		return connection;
 	}
 	
+	// TO-DO CRUD
+	public void create(String request) {
+		
+	}
+	
+	public void read(String request) {
+		
+	}
+
+	public void update(SinhVien source, SinhVien target) {
+		
+	}
+	
+	public void delete(SinhVien target) {
+		
+	}
+	
 	public void runAndPrintQuery(String query) {
 		try {
 			resultSet = statement.executeQuery(query); 
