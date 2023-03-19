@@ -2,6 +2,7 @@ package qlsv;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -45,20 +46,36 @@ public class DBManager {
 	}
 	
 	// TO-DO CRUD
-	public void create(String request) {
+	public void create(SinhVien sv) throws SQLException {
+		String sql = "INSERT INTO SinhVien(Id, Name, Dob, Mark) VALUES (?, ?, ?, ?);";
+		PreparedStatement stm = connection.prepareStatement(sql);
+		stm.setString(1, sv.getId());
+		stm.setString(2, sv.getName());
+		stm.setString(3, sv.getDob());
+		stm.setDouble(4, sv.getMark());
 		
+		 int rowsInserted = stm.executeUpdate();
+         if (rowsInserted > 0) {
+             System.out.println("A new row has been inserted.");
+         }
 	}
 	
 	public void read(String request) {
 		
 	}
 
-	public void update(SinhVien source, SinhVien target) {
+	public void update(String sourceId, SinhVien target) {
 		
 	}
 	
-	public void delete(SinhVien target) {
+	public void delete(String id) throws SQLException {
+		String sql = "DELETE FROM SinhVien WHERE Id = ?;";
+		PreparedStatement stm = connection.prepareStatement(sql);
+		stm.setString(1, id);
 		
+		int rowsDeleted = stm.executeUpdate();
+
+        System.out.println(rowsDeleted + " rows was deleted!");
 	}
 	
 	public void runAndPrintQuery(String query) {
